@@ -1,6 +1,53 @@
 <!DOCTYPE html>
 <html>
+    <style>
+        #addition-heading{
+            color:red;
+        }
+        .addition-paragraphs{
+            text-align:center
+        }
+    </style>
     <body>
-        hello world
+        <h1>Math</h1>
+        <h2 id - "contents-heading">Contents</h2>
+        <a href = "#addition=-heading">Addition</a>
+        <h2 id = "addition-heading">Addition</h2>
+        <p id = "addition-paragraph-one" class = "addition-paragraphs">
+        Addition is the easiest operator to master. 
+        It's when you add the values of two or more numbers 
+        of variables together to form a greater or smaller number.
+         Addition is represented by the symbol +.</p>
+         <p id = "addition-paragraph-two" class = "addition-paragraphs">
+            Try these problem!
+         </p>
+        <li>8+3:<input type = "text" class = "addition-answers"></li>
+        <li>13+27:<input type = "text" class = "addition-answers"></li>       
+        <button id = "button">
+            Ready!
+        </button>
+        <div class = "addition-answer-texts"></div>
+        <div class = "addition-answer-texts"></div>
+        <script>
+            var answer = document.getElementsByClass("addition-answer-texts")
+            var buttonEl = document.getElementById("button");
+            var answers = document.getElementsByClassName("addition-answers")
+            var clicked = function(){
+                if(answers[0].value=="11"){
+                    answer[0].textContent = "8+3=11. CORRECT"
+                }
+                else{
+                    answer[0].textContent = "8+3=11. INCORRECT"
+                }
+                if(answers[1].value==="40"){
+                    answer[1].textContent="13+27=40. CORRECT"
+                }
+                else{
+                    answer[1].textContent="13+27=40. INCORRECT"
+                }
+            };
+            buttonEl.addEventListener("click", clicked);                stuffEl.style.border = "10px ridge gold";
+
+        </script>
     </body>
 </html>

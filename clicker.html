@@ -5,9 +5,13 @@
         <link rel="icon" type="image/x-icon" href="/images/Clicker-icon.jpg">
     </head>
     <style>
+            body{
+                background-color:black
+            }
             #button{
                 position:relative;
                 margin-left:475px;
+                text-align:center;
                 top:275px;
                 width:400px;
                 height:200px;
@@ -17,42 +21,48 @@
             }
             #money-text{
                 font-size:50px;
+                color:white;
                 text-align:center;
-                position:relative;
-                margin-top:-150px;
             }
             #cpc-add-one{
-                position:relative;
-                margin-left:50px;
-                top:-0px;
                 width:100px;
                 height:50px;
             }
             #cps-add-one{
-                position:relative;
-                margin-left:0px;
-                top:0px;
                 width:100px;
                 height:50px;
             }
             #cpc-cost-label{
-                position:relative;
-                margin-left:975px;
-                top:-115px;
+                background-color:rgb(255, 0, 212);
             }
             #cps-cost-label{
-                position:relative;
-                margin-left:1075px;
-                top:-130px;
+                background-color:rgb(255,0,212);
             }
+            .flex-parent-element {
+                display: flex;
+                width: 15%;
+            }
+            .flex-child-element {
+                flex: 1;
+                border: 2px solid blueviolet;
+                margin: 10px;
+                text-align:center;
+            }
+            .flex-child-element:first-child {
+                margin-right: 20px;
+            }
+
+
     </style>
-    <body>
-        <button id = "button">Click this button!</button>
+    <body> 
         <button id = "cpc-add-one">Cpc+1</button>
         <button id = "cps-add-one">Cps+1</button>
-        <div id = "cpc-cost-label"></div>
-        <div id = "cps-cost-label"></div>
+        <div class = "flex-parent-element">
+            <div id = "cpc-cost-label" class = "flex-child-element magenta"></div>
+            <div id = "cps-cost-label" class = "flex-child-element green"></div>
+        </div>
         <div id = "money-text"></div>
+        <button id = "button">Click this button!</button>
         <script>
             var money = 0;
             var cpc = 1;
@@ -65,9 +75,10 @@
             var cpcLabel = document.getElementById("cpc-cost-label")
             var cpsLabel = document.getElementById("cps-cost-label")
             var thing = document.getElementById("money-text");
+            var squares = [];
             thing.textContent=money;
-            cpcLabel.textContent=cpc1Cost;
-            cpsLabel.textContent=cps1Cost;
+            cpcLabel.textContent="$"+cpc1Cost;
+            cpsLabel.textContent="$"+cps1Cost;
             var moneyUp = function(){
                 money+=cpc
                 thing.textContent = money
@@ -77,7 +88,7 @@
                     cpc+=1;
                     money-=cpc1Cost;
                     cpc1Cost*=2;
-                    cpcLabel.textContent=cpc1Cost;
+                    cpcLabel.textContent="$"+cpc1Cost;
                     thing.textContent=money;
                 }
             }
@@ -86,7 +97,7 @@
                     cps+=1;
                     money-=cps1Cost;
                     cps1Cost*=2;
-                    cpsLabel.textContent=cps1Cost;
+                    cpsLabel.textContent="$"+cps1Cost;
                     thing.textContent=money;
                 }
             }

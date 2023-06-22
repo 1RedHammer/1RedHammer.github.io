@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Button clicker</title>
+        <link rel="icon" type="image/x-icon" href="/images/Clicker-icon.jpg">
+    </head>
+    <style>
+            #button{
+                position:relative;
+                margin-left:475px;
+                top:275px;
+                width:400px;
+                height:200px;
+                font-size:50px;
+                font-family:'Courier New', Courier, monospace;
+                background-color: rgb(0, 255, 98);
+            }
+            #money-text{
+                font-size:50px;
+                text-align:center;
+                position:relative;
+                margin-top:-150px;
+            }
+            #cpc-add-one{
+                position:relative;
+                margin-left:50px;
+                top:-0px;
+                width:100px;
+                height:50px;
+            }
+            #cps-add-one{
+                position:relative;
+                margin-left:0px;
+                top:0px;
+                width:100px;
+                height:50px;
+            }
+            #cpc-cost-label{
+                position:relative;
+                margin-left:975px;
+                top:-115px;
+            }
+            #cps-cost-label{
+                position:relative;
+                margin-left:1075px;
+                top:-130px;
+            }
+    </style>
+    <body>
+        <button id = "button">Click this button!</button>
+        <button id = "cpc-add-one">Cpc+1</button>
+        <button id = "cps-add-one">Cps+1</button>
+        <div id = "cpc-cost-label"></div>
+        <div id = "cps-cost-label"></div>
+        <div id = "money-text"></div>
+        <script>
+            var money = 0;
+            var cpc = 1;
+            var cpc1Cost=50;
+            var cps1Cost=100;
+            var cps=0;
+            var buttonMoney = document.getElementById("button");
+            var buttonCpc1 = document.getElementById("cpc-add-one")
+            var buttonCps1 = document.getElementById("cps-add-one")
+            var cpcLabel = document.getElementById("cpc-cost-label")
+            var cpsLabel = document.getElementById("cps-cost-label")
+            var thing = document.getElementById("money-text");
+            thing.textContent=money;
+            cpcLabel.textContent=cpc1Cost;
+            cpsLabel.textContent=cps1Cost;
+            var moneyUp = function(){
+                money+=cpc
+                thing.textContent = money
+            };
+            var cpc1 = function(){
+                if(money>cpc1Cost-1){
+                    cpc+=1;
+                    money-=cpc1Cost;
+                    cpc1Cost*=2;
+                    cpcLabel.textContent=cpc1Cost;
+                    thing.textContent=money;
+                }
+            }
+            var cps1 = function(){
+                if(money>cps1Cost-1){
+                    cps+=1;
+                    money-=cps1Cost;
+                    cps1Cost*=2;
+                    cpsLabel.textContent=cps1Cost;
+                    thing.textContent=money;
+                }
+            }
+            var intervalId = window.setInterval(function(){
+                money+=cps;
+                thing.textContent=money
+            }, 1000);
+            buttonMoney.addEventListener("click", moneyUp);  
+            buttonCpc1.addEventListener("click",cpc1)  
+            buttonCps1.addEventListener("click",cps1)
+        </script>
+    </body>
+</html>

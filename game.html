@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #player{
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+    <img src = "images/Steve_(Minecraft).png" width = 100px id = "player">
+    <script type = "text/javascript">
+        var p = document.getElementById("player");
+        document.onkeydown = function(event) {
+            console.log(event);
+            switch (event.keyCode) {
+                case 37:
+                    /*left*/
+                        v = p.style.left ;
+                        p.style.left=String(Number(v.replace("px",""))-5) + "px"
+                    
+                    break;
+                case 38:
+                        /*up*/
+                        v = p.style.top ;
+                        p.style.top=String(Number(v.replace("px",""))-5) + "px"
+                
+                    break;
+                case 39:
+                        /*right*/
+                        v = p.style.left ;
+                        p.style.left=String(Number(v.replace("px",""))+5) + "px"
+                    
+                    break;
+                case 40:
+                        /*down*/
+                        v = p.style.top ;
+                        p.style.top=String(Number(v.replace("px",""))+5) + "px"
+                
+                    break;
+            }
+        };
+    </script>
+</body>
+</html>

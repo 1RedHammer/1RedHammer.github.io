@@ -17,7 +17,7 @@
             const canvas = document.getElementById("main-canvas");
             const ctx = canvas.getContext("2d");
             const interval = setInterval(doStuff,5)
-            const spawnFire = setInterval(spawn,2)
+            const spawnFire = setInterval(spawn,400)
             var player;
             var fireballs = [];
             var Player = function(p){
@@ -25,7 +25,7 @@
                 this.vel = [1,1];
                 this.size = [50,50]
                 this.display = function(){
-                    ctx.fillStyle = "#F0000F";
+                    ctx.fillStyle = "#000000";
                     ctx.fillRect(this.pos[0],this.pos[1],this.size[0],this.size[1])
                 }
                 this.update = function(){
@@ -67,9 +67,10 @@
                     this.vel = [0,-this.speed];
                 }
                 this.display = function(){
-                    ctx.fillStyle = "#FF0000";
                     ctx.beginPath();
                     ctx.arc(this.pos[0], this.pos[1], 25, 0, 2 * Math.PI);
+                    ctx.fillStyle = "#FF0000";
+                    ctx.fill()
                     ctx.stroke(); 
                 };
                 this.update = function(){

@@ -48,32 +48,32 @@
                 };
             };
             var Fireball = function(s){
-                var thing = round(Math.random(3))
+                var thing = Math.round(Math.random()*3)
                 this.speed = s;
                 if(thing === 0){
-                    this.pos = [0,Math.random(canvas.height)];
+                    this.pos = [0,Math.random()*canvas.height];
                     this.vel = [this.speed,0];
                 }
                 if(thing === 1){
-                    this.pos = [Math.random(canvas.width),0];
+                    this.pos = [Math.random()*canvas.width,0];
                     this.vel = [0,this.speed];
                 }
                 if(thing === 2){
-                    this.pos = [canvas.width,Math.random(canvas.height)];
+                    this.pos = [canvas.width,Math.random()*canvas.height];
                     this.vel = [-this.speed,0];
                 }
                 if(thing === 3){
-                    this.pos = [Math.random(canvas.width),canvas.height];
+                    this.pos = [Math.random()*canvas.width,canvas.height];
                     this.vel = [0,-this.speed];
                 }
                 this.display = function(){
                     ctx.fillStyle = "#FF0000";
                     ctx.beginPath();
-                    ctx.arc(95, 50, 25, 0, 2 * Math.PI);
+                    ctx.arc(this.pos[0], this.pos[1], 25, 0, 2 * Math.PI);
                     ctx.stroke(); 
                 };
                 this.update = function(){
-                    this.pos[0] += this.vel[0];
+                    this.pos[0] += this.vel[0]; 
                     this.pos[1] += this.vel[1];
                 };
                 this.go = function(){
@@ -83,7 +83,7 @@
             };
             player = new Player([0,0]);
             function spawn(){
-                fireballs.push(new Fireball());
+                fireballs.push(new Fireball(3));
             }
             function doStuff(){
                 ctx.fillStyle = "#FFFFFF";

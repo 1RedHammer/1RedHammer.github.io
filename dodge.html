@@ -17,7 +17,9 @@
             const canvas = document.getElementById("main-canvas");
             const ctx = canvas.getContext("2d");
             const interval = setInterval(doStuff,5)
+            const spawnFire = setInterval(spawn,2)
             var player;
+            var fireballs = [];
             var Player = function(p){
                 this.pos = p;
                 this.vel = [1,1];
@@ -45,11 +47,51 @@
                     this.display();
                 };
             };
+            var Fireball = function(s){
+                var thing = round(Math.random(3))
+                this.speed = s;
+                if(thing === 0){
+                    this.pos = [0,Math.random(canvas.height)];
+                    this.vel = [this.speed,0];
+                }
+                if(thing === 1){
+                    this.pos = [Math.random(canvas.width),0];
+                    this.vel = [0,this.speed];
+                }
+                if(thing === 2){
+                    this.pos = [canvas.width,Math.random(canvas.height)];
+                    this.vel = [-this.speed,0];
+                }
+                if(thing === 3){
+                    this.pos = [Math.random(canvas.width),canvas.height];
+                    this.vel = [0,-this.speed];
+                }
+                this.display = function(){
+                    ctx.fillStyle = "#FF0000";
+                    ctx.beginPath();
+                    ctx.arc(95, 50, 25, 0, 2 * Math.PI);
+                    ctx.stroke(); 
+                };
+                this.update = function(){
+                    this.pos[0] += this.vel[0];
+                    this.pos[1] += this.vel[1];
+                };
+                this.go = function(){
+                    this.update();
+                    this.display();
+                };
+            };
             player = new Player([0,0]);
+            function spawn(){
+                fireballs.push(new Fireball());
+            }
             function doStuff(){
                 ctx.fillStyle = "#FFFFFF";
                 ctx.fillRect(0,0,500,500)
                 player.go();
+                for(var i = 0;i<fireballs.length;i+=1){
+                    fireballs[i].go();
+                }
             }
             document.onkeydown = function(event) {
             console.log(event);

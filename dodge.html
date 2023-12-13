@@ -18,15 +18,24 @@
             const ctx = canvas.getContext("2d");
             const interval = setInterval(doStuff,5)
             const spawnFire = setInterval(spawn,400)
+            var dead = false;
             var player;
             var fireballs = [];
+            var findDist = function(x1,y1,x2,y2){
+                let y = x2-x1;
+                let x = y2-y1;
+                return Math.sqrt(x*x + y*y)
+            }
             var Player = function(p){
                 this.pos = p;
                 this.vel = [1,1];
                 this.size = [50,50]
                 this.display = function(){
+                    ctx.beginPath();
+                    ctx.arc(this.pos[0], this.pos[1], 25, 0, 2 * Math.PI);
                     ctx.fillStyle = "#000000";
-                    ctx.fillRect(this.pos[0],this.pos[1],this.size[0],this.size[1])
+                    ctx.fill()
+                    ctx.stroke(); 
                 }
                 this.update = function(){
                     this.vel[0] *= 0.95;
@@ -40,6 +49,11 @@
                     if(this.pos[1] + this.size[1] >= canvas.height || this.pos[1] <= 0){
                         this.pos[1] -= this.vel[1];
                         this.vel[1] = 0;
+                    }
+                    for(var i = 0;i<fireballs.length;i++){
+                        if(findDist(this.pos[0],this.pos[1],fireballs[i].pos[0],fireballs[i].pos[1])<=50){
+                            dead = true;
+                        }
                     }
                 };
                 this.go = function(){
@@ -82,16 +96,23 @@
                     this.display();
                 };
             };
-            player = new Player([0,0]);
+            player = new Player([canvas.width/2,canvas.height/2]);
             function spawn(){
                 fireballs.push(new Fireball(3));
             }
             function doStuff(){
                 ctx.fillStyle = "#FFFFFF";
-                ctx.fillRect(0,0,500,500)
+                ctx.fillRect(0,0,canvas.width,canvas.height)
                 player.go();
                 for(var i = 0;i<fireballs.length;i+=1){
                     fireballs[i].go();
+                }
+                if(dead){
+                    ctx.fillStyle = "#8B0000";
+                    ctx.fillRect(0,0,canvas.width,canvas.height)
+                    ctx.fillStyle = "#000000"
+                    ctx.font = "30px Arial";
+                    ctx.fillText("YOU DIED", canvas.width/2-75, canvas.height/2-10);    
                 }
             }
             document.onkeydown = function(event) {
